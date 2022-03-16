@@ -1,16 +1,29 @@
 import React,{Component} from "react";
 import "./PersonCard.css"
 class PersonCard extends Component{
-    render(){
-        const { firstName, lastName, age, hairColor } = this.props;
+    constructor(props){
+        super(props);
+        this.state = {
+            age:props.age
+        }
+    }
 
+    birthday = () => {
+        let actualAge = this.state.age;
+        actualAge++;
+        this.setState({age:actualAge});
+    }
+
+    render(){
+        const { firstName, lastName, hairColor } = this.props;
         return (
             <div className="card">
                 <h1>{lastName}, {firstName}</h1>
                 <div className="card-body">
-                    <p>Age: {age}</p>
+                    <p>Age: {this.state.age}</p>
                     <p>Hair Color: {hairColor}</p>
                 </div>
+                <button onClick={this.birthday}>Birthday button for {firstName} {lastName}</button>
             </div>
         );
     }
